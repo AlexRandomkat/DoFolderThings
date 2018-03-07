@@ -134,6 +134,31 @@ public class Random {
 	 */
 	public static class Strings {
 		/**
+		 * Makes a random string using the characters
+		 * 0123456789abcdefghijklmnopqrstuvwxyz. Each character has an approximately
+		 * equal chance in appearing in any given position of the generated string.
+		 * 
+		 * @param l
+		 *            Length of generated strings.
+		 * @return A String of length l
+		 */
+		public static String randomString(int l) {
+			StringBuilder out = new StringBuilder(l);
+			int temp;
+			while (out.length() < l) {
+				temp = (int) (Math.random() * 36);
+				if (temp < 10) {
+					// turn an integer into a character from 0-9
+					out.append((char) (temp + 48));
+				} else {
+					// turn an integer into a character from a-z
+					out.append((char) (temp + 87));
+				}
+			}
+			return out.toString();
+		}
+
+		/**
 		 * Returns an array of strings using numbers and lowercase letters. Uses
 		 * characters: 0123456789abcdefghijklmnopqrstuvwxyz The strings are listed from
 		 * least to greatest, if you converted the characters to ints and smushed the
@@ -231,6 +256,23 @@ public class Random {
 			}
 
 			return shuffled;
+		}
+
+		/**
+		 * Returns an array of random strings. Repeats are allowed.
+		 * 
+		 * @param n
+		 *            Number of strings to be generated.
+		 * @param length
+		 *            Length of each generated string.
+		 * @return A String[] of length n containing the generated strings.
+		 */
+		public static String[] randomStrings(int n, int length) {
+			String[] out = new String[n];
+			for (int i = 0; i < n; i++) {
+				out[i] = randomString(length);
+			}
+			return out;
 		}
 	}
 }
